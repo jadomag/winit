@@ -425,6 +425,11 @@ impl Window {
 
     unsafe fn restore_saved_window(&self) {
         let window_state = self.window_state.lock().unwrap();
+
+        window_state.saved_window_info.is_none() {
+            return;
+        }
+
         // Reset original window style and size.  The multiple window size/moves
         // here are ugly, but if SetWindowPos() doesn't redraw, the taskbar won't be
         // repainted.  Better-looking methods welcome.
